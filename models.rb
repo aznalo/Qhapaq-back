@@ -37,7 +37,7 @@ end
 class Menu < ActiveRecord::Base
   belongs_to :genre
   belongs_to :category
-  has_many :ingredient, dependent: :destroy
+  has_many :ingredients, dependent: :destroy
 end
 
 class Ingredient < ActiveRecord::Base

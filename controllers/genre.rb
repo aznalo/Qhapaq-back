@@ -5,7 +5,7 @@ end
 
 # ジャンルの詳細
 get '/genre/:id' do
-  Genre.find_by(id: params[:id]).to_json
+  Genre.find_by(id: params[:id]).menus.to_json
 end
 
 # ジャンルの作成
