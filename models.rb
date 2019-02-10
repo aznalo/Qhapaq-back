@@ -1,8 +1,6 @@
 require 'bundler/setup'
 Bundler.require
-require 'net/http'
-require 'uri'
-require 'json'
+require './controllers/user'
 require './controllers/genre'
 require './controllers/category'
 require './controllers/menu'
@@ -25,6 +23,11 @@ end
 
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :user_tokens
+end
+
+class UserToken < ActiveRecord::Base
+    belongs_to :user
 end
 
 class Genre < ActiveRecord::Base
