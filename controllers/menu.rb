@@ -19,12 +19,12 @@ post '/menu' do
         menu: menu,
         name: i['name'],
         amount: i['amount'],
-        unit: i['unit']['enum'],
+        unit: i['unit'],
         cost: i['cost'],
         description: i['description']
       )
     end
-    status 201
+    menu.to_json
   else
     status 500
   end
