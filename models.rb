@@ -23,18 +23,22 @@ after do
   ActiveRecord::Base.connection.close
 end
 
+class User < ActiveRecord::Base
+  has_secure_password
+end
+
 class Genre < ActiveRecord::Base
-  has_many :categories
+  has_many :categories, dependent: :destroy
 end
 
 class Category < ActiveRecord::Base
   belongs_to :genre
-  has_many :menus
+  has_many :menus, dependent: :destroy
 end
 
 class Menu < ActiveRecord::Base
   belongs_to :category
-  has_many :ingredient
+  has_many :ingredient, dependent: :destroy
 end
 
 class Ingredient < ActiveRecord::Base
