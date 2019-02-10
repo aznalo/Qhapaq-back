@@ -31,11 +31,18 @@ class UserToken < ActiveRecord::Base
 end
 
 class Genre < ActiveRecord::Base
-  has_many :categories, dependent: :destroy
+  has_many :genre_categories
+  has_many :categories, through: :genre_categories
+end
+
+class GenreCategory < ActiveRecord::Base
+  belongs_to :genre
+  belongs_to :category
 end
 
 class Category < ActiveRecord::Base
-  belongs_to :genre
+  has_many :genre_categories
+  has_many :genres, through: :genre_categories
   has_many :menus, dependent: :destroy
 end
 
