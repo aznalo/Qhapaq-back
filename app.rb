@@ -8,9 +8,10 @@ set :server, 'thin'
 set :sockets, []
 
 before do
+  Time.zone = 'Tokyo'
   content_type :json
   headers 'Access-Control-Allow-Origin' => '*',
-          'Access-Control-Allow-Methods' => %w[GET POST PUT DELETE OPTIONS]
+          'Access-Control-Allow-Methods' => %w[GET POST PUT DELETE]
 end
 
 not_found do
