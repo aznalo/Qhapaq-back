@@ -23,7 +23,7 @@ end
 
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :user_tokens
+  has_many :user_tokens, dependent: :destroy
 end
 
 class UserToken < ActiveRecord::Base
@@ -31,26 +31,19 @@ class UserToken < ActiveRecord::Base
 end
 
 class Genre < ActiveRecord::Base
-  has_many :genre_categories
-  has_many :categories, through: :genre_categories
-end
-
-class GenreCategory < ActiveRecord::Base
-  belongs_to :genre
-  belongs_to :category
-end
-
-class Category < ActiveRecord::Base
-  has_many :genre_categories
-  has_many :genres, through: :genre_categories
   has_many :menus, dependent: :destroy
 end
 
 class Menu < ActiveRecord::Base
+  belongs_to :genre
   belongs_to :category
   has_many :ingredient, dependent: :destroy
 end
 
 class Ingredient < ActiveRecord::Base
   belongs_to :menu
+end
+
+class Category < ActiveRecord::Base
+  has_many :menus, dependent: :destroy
 end
