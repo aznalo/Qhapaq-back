@@ -3,6 +3,9 @@ Bundler.require
 require 'net/http'
 require 'uri'
 require 'json'
+require './controllers/genre'
+require './controllers/category'
+require './controllers/menu'
 
 config = YAML.load_file('./database.yml')
 
