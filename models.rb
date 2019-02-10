@@ -19,3 +19,21 @@ ActiveRecord::Base.default_timezone = :local
 after do
   ActiveRecord::Base.connection.close
 end
+
+class Genre < ActiveRecord::Base
+  has_many :categories
+end
+
+class Category < ActiveRecord::Base
+  belongs_to :genre
+  has_many :menus
+end
+
+class Menu < ActiveRecord::Base
+  belongs_to :category
+  has_many :ingredient
+end
+
+class Ingredient < ActiveRecord::Base
+  belongs_to :menu
+end
