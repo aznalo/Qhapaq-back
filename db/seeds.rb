@@ -19,3 +19,9 @@ end
       category: category
     )
 end
+
+User.new(
+  name: 'Administrator',
+  password: 'nkjk28',
+  password_confirmation: 'nkjk28'
+).save
