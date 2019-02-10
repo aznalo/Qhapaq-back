@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_02_10_044513) do
     t.integer "menu_id", null: false
     t.string "name", null: false
     t.integer "amount", default: 0, null: false
+    t.integer "unit", default: 0, null: false
     t.integer "cost", default: 0, null: false
     t.string "description"
     t.datetime "created_at", null: false
@@ -60,4 +61,5 @@ ActiveRecord::Schema.define(version: 2019_02_10_044513) do
     t.string "name", null: false
     t.string "password_digest"
   end
+
 end
