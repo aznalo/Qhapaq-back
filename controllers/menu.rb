@@ -1,4 +1,8 @@
 # index
+get '/memus/:id' do
+  Genre.find_by(id: params[:id]).menus.to_json
+end
+
 get '/menu/:id' do
   menu = Menu.find_by(id: params[:id])
   menu.attributes.merge({ingredients: menu.ingredients}).to_json
