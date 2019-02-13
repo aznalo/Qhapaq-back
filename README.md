@@ -1,5 +1,23 @@
 # Qhapaq-back
 
+## Installation
+
+```bash
+docker-compose run bundle install --path vendor/bundle --without production -j4
+
+docker-compose run web bundle exec rake db:create
+
+docker-compose run web bundle exec rake db:migrate
+
+docker-compose run web bundle exec rake db:seed
+```
+
+## Usage
+
+```bash
+docker-compose up
+```
+
 ## APIの仕様
 
 ### User関連
