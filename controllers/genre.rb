@@ -5,7 +5,7 @@ end
 
 # ジャンルの詳細
 get '/genre/:id' do
-  Genre.find_by(id: params[:id]).menus.to_json
+  Genre.find_by(id: params[:id]).to_json
 end
 
 # ジャンルの作成
@@ -30,11 +30,12 @@ delete '/genre/:id' do
 end
 
 # 該当IDのジャンル編集
-put '/genre/:id' do
+post '/genre/:id' do
   genre_params = JSON.parse(request.body.read)
   genre = Genre.find_by(id: params[:id])
   if genre
     genre.update({name: genre_params['name']})
+    genre.to_json
   else
     status 404
   end

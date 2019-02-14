@@ -74,10 +74,51 @@ docker-compose up
 
 #### ジャンルを登録
 > (POST) http://localhost:4567/genre
+
+##### 送るデータ
+```js
+{
+  "name": "xxxx",
+  "description": "xxxx"
+}
+```
+
+##### 返却データ
+
+###### 作成成功時
+`ステータス 201 を返却`
+###### 作成失敗時
+`ステータス 500 を返却`
+
+
+#### ジャンルを編集
+> (POST) http://localhost:4567/genre/:id
+
+##### 送るデータ
+```js
+{
+  "name": "xxxx",
+  "description": "xxxx"
+}
+```
+
+##### 返却データ
+
+###### 作成成功時
+```js
+{
+  "name": "xxxx",
+  "description": "xxxx"
+}
+```
+
+###### 作成失敗時
+`ステータス 500 を返却`
+
 ### Menu関連
 
 #### メニュー一覧を取得
-> (GET) http://localhost:4567/genre/:id (:idはジャンルのIDを指定する)
+> (GET) http://localhost:4567/menus/:id (:idはジャンルのユニークIDを指定する)
 カテゴリ１（今回は主食)に属するメニュー一覧を取得する
 
 ```js
