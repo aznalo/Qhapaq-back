@@ -1,5 +1,5 @@
 # index
-get '/memus/:id' do
+get '/menus/:id' do
   Genre.find_by(id: params[:id]).menus.to_json
 end
 

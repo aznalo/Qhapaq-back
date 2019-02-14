@@ -30,7 +30,7 @@ delete '/genre/:id' do
 end
 
 # 該当IDのジャンル編集
-put '/genre/:id' do
+post '/genre/:id' do
   genre_params = JSON.parse(request.body.read)
   genre = Genre.find_by(id: params[:id])
   if genre
