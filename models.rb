@@ -24,6 +24,10 @@ end
 class User < ActiveRecord::Base
   has_secure_password
   has_many :user_tokens, dependent: :destroy
+  def self.authentication(token)
+    token = UserToken.find_by(uuid: token)
+    return token && token.user && Time.zone.now < token.expiration_time
+  end
 end
 
 class UserToken < ActiveRecord::Base

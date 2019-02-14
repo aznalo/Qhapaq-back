@@ -11,6 +11,7 @@ end
 # create
 post '/menu' do
   menu_params = JSON.parse(request.body.read)
+  (status 403) unless User.authentication(genre_params['userToken'])
   menu = Menu.new(hoge(menu_params))
   status 500 unless menu.save
   menu_params['ingredients'].each { |v| fuga(menu, v) }
@@ -20,6 +21,7 @@ end
 # update
 post '/menu/:id' do
   menu_params = JSON.parse(request.body.read)
+  (status 403) unless User.authentication(genre_params['userToken'])
   menu = Menu.find_by(id: params[:id])
   status 404 unless menu
   status 500 unless menu.update(hoge(menu_params))

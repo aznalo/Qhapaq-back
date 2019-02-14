@@ -20,14 +20,3 @@ post '/user/sign_up/:token' do
   #ユーザーのアカウント作成はAdminアカウントからのユーザー作成用URLを発行し、
   #そのURLから一定時間以内はアカウントを作れるようにする
 end
-
-# Tokenの認証用
-post '/user/authentication' do
-  user_params = JSON.parse(request.body.read)
-  token = UserToken.find_by(uuid: user_params['token'])
-  if token && token.user && Time.zone.now < token.expiration_time
-    status 200
-  else
-    status 400
-  end
-end

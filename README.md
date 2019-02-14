@@ -79,7 +79,8 @@ docker-compose up
 ```js
 {
   "name": "xxxx",
-  "description": "xxxx"
+  "description": "xxxx",
+  "userToken": 'xxxx-xxxx-xxxx-xxxx'
 }
 ```
 
@@ -89,6 +90,7 @@ docker-compose up
 `ステータス 201 を返却`
 ###### 作成失敗時
 `ステータス 500 を返却`
+またuserTokenが期限切れ又は入っていない場合 `403`
 
 
 #### ジャンルを編集
@@ -98,7 +100,8 @@ docker-compose up
 ```js
 {
   "name": "xxxx",
-  "description": "xxxx"
+  "description": "xxxx",
+  "userToken": 'xxxx-xxxx-xxxx-xxxx'
 }
 ```
 
@@ -114,6 +117,7 @@ docker-compose up
 
 ###### 作成失敗時
 `ステータス 500 を返却`
+またuserTokenが期限切れ又は入っていない場合 `403`
 
 ### Menu関連
 
@@ -219,7 +223,8 @@ docker-compose up
       "cost": 0,
       "description": ""
     }
-  ]
+  ],
+  "userToken": 'xxxx-xxxx-xxxx-xxxx'
 }
 ```
 
@@ -240,6 +245,7 @@ docker-compose up
 
 ###### 作成失敗時
 `ステータス 500 を返却`
+またuserTokenが期限切れ又は入っていない場合 `403`
 
 
 #### メニューを更新
@@ -247,6 +253,7 @@ docker-compose up
 `/:id` の部分は更新したいメニューのユニークID
 
 最低限URLが合っていれば更新したい項目の`key`と`value`を入れてくれれば更新できます。
+(userTokenは必須無いと `403` 返します)
 
 ##### 送るデータ
 ```js
@@ -258,7 +265,8 @@ docker-compose up
   ],
   "removeIngredientItemList": [ //削除したい材料のユニークIDを入れる
     {"id": 38}
-  ]
+  ],
+  "userToken": 'xxxx-xxxx-xxxx-xxxx'
 }
 ```
 
@@ -279,3 +287,4 @@ docker-compose up
 
 ###### 作成失敗時
 `ステータス 500 を返却`
+またuserTokenが期限切れ又は入っていない場合 `403`
