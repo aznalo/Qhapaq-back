@@ -11,16 +11,20 @@ end
 #show
 get '/menu/:id' do
   menu = Menu.find_by(id: params[:id])
-  menu.attributes.merge({ingredients: menu.ingredients}).to_json
+  menu.attributes.merge({
+    ingredients: menu.ingredients,
+    steps: menu.steps
+  }).to_json
 end
 
 # create
 post '/menu' do
-  menu_params = JSON.parse(request.body.read)
-  (status 403) unless User.authentication(genre_params['userToken'])
-  menu = Menu.new(hoge(menu_params))
+  pp menu_params = JSON.parse(request.body.read)
+  (status 403) unless User.authentication(menu_params['userToken'])
+  menu = Menu.new(parseMenu(menu_params))
   status 500 unless menu.save
-  menu_params['ingredients'].each { |v| fuga(menu, v) }
+  menu_params['ingredients'].each { |v| updateIngredients(menu, v) }
+  menu_params['steps'].each { |v| updateSteps(menu, v) }
   menu.to_json
 end
 
@@ -32,7 +36,9 @@ post '/menu/:id' do
   status 404 unless menu
   status 500 unless menu.update(parseMenu(menu_params))
   menu_params['ingredients'].each { |v| updateIngredients(menu, v) }
+  menu_params['steps'].each { |v| updateSteps(menu, v) }
   menu_params['removeIngredientItemList'].each { |v| Ingredient.find_by(id: v['id']).destroy }
+  menu_params['removeStepItemList'].each { |v| Step.find_by(id: v['id']).destroy }
   menu.to_json
 end
 
@@ -57,6 +63,17 @@ def updateIngredients(menu, params)
     amount:      params['amount'],
     unit:        params['unit'],
     cost:        params['cost'],
+    description: params['description']
+  )
+end
+
+def updateSteps(menu, params)
+  step = Step.find_or_initialize_by(
+    description: params['description'],
+    menu: menu
+  )
+  step.update_attributes(
+    menu: menu,
     description: params['description']
   )
 end
