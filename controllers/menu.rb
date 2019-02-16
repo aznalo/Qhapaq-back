@@ -19,7 +19,7 @@ end
 
 # create
 post '/menu' do
-  pp menu_params = JSON.parse(request.body.read)
+  menu_params = JSON.parse(request.body.read)
   (status 403) unless User.authentication(menu_params['userToken'])
   menu = Menu.new(parseMenu(menu_params))
   status 500 unless menu.save
