@@ -25,7 +25,7 @@ docker-compose up
 > (POST) http://localhost:4567/user/sign_in
 
 ##### 送るデータ
-```js
+```javascript
 {
   "name": "xxxx",
   "password": "xxxx"
@@ -35,7 +35,7 @@ docker-compose up
 ##### 返却データ
 
 ###### 認証成功時
-```js
+```javascript
 {
   "user": {
     "name": "xxx",
@@ -52,7 +52,7 @@ docker-compose up
 > (GET) http://localhost:4567/genres
 
 ##### 返却データ
-```js
+```javascript
 [
   {
     "id": 1,
@@ -76,7 +76,7 @@ docker-compose up
 > (POST) http://localhost:4567/genre
 
 ##### 送るデータ
-```js
+```javascript
 {
   "name": "xxxx",
   "description": "xxxx",
@@ -97,7 +97,7 @@ docker-compose up
 > (POST) http://localhost:4567/genre/:id
 
 ##### 送るデータ
-```js
+```javascript
 {
   "name": "xxxx",
   "description": "xxxx",
@@ -108,7 +108,7 @@ docker-compose up
 ##### 返却データ
 
 ###### 作成成功時
-```js
+```javascript
 {
   "name": "xxxx",
   "description": "xxxx"
@@ -125,7 +125,7 @@ docker-compose up
 > (GET) http://localhost:4567/menus/:id (:idはジャンルのユニークIDを指定する)
 カテゴリ１（今回は主食)に属するメニュー一覧を取得する
 
-```js
+```javascript
 [
   {
     "id": 1, //メニューのユニークID
@@ -153,7 +153,7 @@ docker-compose up
 #### メニューの詳細を取得
 > (GET) http://localhost:4567/menu/:id (:idはmenuのIDを指定する)
 
-```js
+```javascript
 {
   "id": 18, // メニューのユニークID
   "category_id": 1, //属しているカテゴリのID
@@ -196,15 +196,31 @@ docker-compose up
       "created_at": "xxxx-xx-xxTxx:xx:xx.xx+xx:xx",
       "updated_at": "xxxx-xx-xxTxx:xx:xx.xx+xx:xx"
     }
+  ],
+  steps: [
+    {
+      "id": 1,
+      "menu_id": 18,
+      "description": "にんにくを切る",
+      "created_at": "xxxx-xx-xxTxx:xx:xx.xx+xx:xx",
+      "updated_at": "xxxx-xx-xxTxx:xx:xx.xx+xx:xx"
+    },
+    {
+      "id": 2,
+      "menu_id": 18,
+      "description": "フライパンにオリーブオイルを敷く",
+      "created_at": "xxxx-xx-xxTxx:xx:xx.xx+xx:xx",
+      "updated_at": "xxxx-xx-xxTxx:xx:xx.xx+xx:xx"
+    }
   ]
- }
+}
 ```
 
 #### メニューを新規作成
 > (POST) http://localhost:4567/menu
 
 ##### 送るデータ
-```js
+```javascript
 {
   "name": "", //メニュー名
   "genre_id": "", //属したいジャンルのID
@@ -224,6 +240,12 @@ docker-compose up
       "description": ""
     }
   ],
+  steps: [ //工程
+    {"description": ""}, //工程の説明
+    {"description": ""},
+    {"description": ""},
+    {"description": ""},
+  ]
   "userToken": 'xxxx-xxxx-xxxx-xxxx'
 }
 ```
@@ -231,7 +253,7 @@ docker-compose up
 ##### 返却データ
 
 ###### 作成成功時
-```js
+```javascript
 {
   "id": 20,
   "category_id": 1,
@@ -256,7 +278,7 @@ docker-compose up
 (userTokenは必須無いと `403` 返します)
 
 ##### 送るデータ
-```js
+```javascript
 {
   "name": "ハンバーグ",
   "description": null,
@@ -266,6 +288,9 @@ docker-compose up
   "removeIngredientItemList": [ //削除したい材料のユニークIDを入れる
     {"id": 38}
   ],
+  "removeStepItemList": [ //削除したい工程のユニークIDを入れる
+    {"id": 39}
+  ]
   "userToken": 'xxxx-xxxx-xxxx-xxxx'
 }
 ```
@@ -273,7 +298,7 @@ docker-compose up
 ##### 返却データ
 
 ###### 作成成功時
-```js
+```javascript
 {
   "id": 20,
   "category_id": 1,
