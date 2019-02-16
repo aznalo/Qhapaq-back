@@ -42,11 +42,17 @@ class Menu < ActiveRecord::Base
   belongs_to :genre
   belongs_to :category
   has_many :ingredients, dependent: :destroy
+  has_many :steps, dependent: :destroy
 end
 
 class Ingredient < ActiveRecord::Base
   belongs_to :menu
 end
+
 class Category < ActiveRecord::Base
   has_many :menus, dependent: :destroy
+end
+
+class Step < ActiveRecord::Base
+  belongs_to :menu
 end
