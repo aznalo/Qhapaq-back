@@ -34,7 +34,7 @@ end
 # 該当IDのジャンル編集
 post '/genre/:id' do
   genre_params = JSON.parse(request.body.read)
-  (status 403) unless User.authentication(genre_params['userToken'])
+  # (status 403) unless User.authentication(genre_params['userToken'])
   genre = Genre.find_by(id: params[:id])
   if genre
     genre.update({name: genre_params['name']})
