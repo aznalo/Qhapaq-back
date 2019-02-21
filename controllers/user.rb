@@ -26,3 +26,13 @@ post '/user/sign_up/:token' do
   #ユーザーのアカウント作成はAdminアカウントからのユーザー作成用URLを発行し、
   #そのURLから一定時間以内はアカウントを作れるようにする
 end
+
+get '/authentication/:token' do
+  if User.authentication(params[:token])
+    body ({status: 'successful'}.to_json)
+    status 201
+  else
+    body ({status: 'failure'}.to_json)
+    status 403
+  end
+end
