@@ -8,7 +8,13 @@ post '/user/sign_in' do
       uuid: SecureRandom.uuid,
       expiration_time: Time.zone.now.since(1.hours)
     )
-    {user: {name: user.name}, token: token.uuid }.to_json
+    {
+      user: {
+        name: user.name
+      },
+      token: token.uuid,
+      expiration_time: token.expiration_time
+    }.to_json
   else
     status 400
   end
